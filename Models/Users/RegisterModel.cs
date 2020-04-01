@@ -15,5 +15,7 @@ namespace WebApi.Models.Users
 
         [Required]
         public string Password { get; set; }
+
+        public string Role { get; set; }
     }
 }
