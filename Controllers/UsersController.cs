@@ -91,7 +91,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
@@ -99,8 +99,9 @@ namespace WebApi.Controllers
             return Ok(model);
         }
 
+
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById([FromForm] int id)
         {
             var user = _userService.GetById(id);
             var model = _mapper.Map<UserModel>(user);
