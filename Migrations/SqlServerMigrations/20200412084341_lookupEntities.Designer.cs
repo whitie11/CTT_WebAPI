@@ -3,64 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Helpers;
 
 namespace WebApi.Migrations.SqlServerMigrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200412084341_lookupEntities")]
+    partial class lookupEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("WebApi.Entities.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClinicIdId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("InterventionIdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PatientIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SlotIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StatusIdId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClinicIdId");
-
-                    b.HasIndex("InterventionIdId");
-
-                    b.HasIndex("PatientIdId");
-
-                    b.HasIndex("SlotIdId");
-
-                    b.HasIndex("StatusIdId");
-
-                    b.ToTable("Appointments");
-                });
 
             modelBuilder.Entity("WebApi.Entities.Clinic", b =>
                 {
@@ -93,36 +52,6 @@ namespace WebApi.Migrations.SqlServerMigrations
                     b.HasKey("Id");
 
                     b.ToTable("Interventions");
-                });
-
-            modelBuilder.Entity("WebApi.Entities.Patient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CPMSno")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DoB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NHSno")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("WebApi.Entities.Status", b =>
@@ -186,29 +115,6 @@ namespace WebApi.Migrations.SqlServerMigrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("WebApi.Entities.Appointment", b =>
-                {
-                    b.HasOne("WebApi.Entities.Clinic", "ClinicId")
-                        .WithMany()
-                        .HasForeignKey("ClinicIdId");
-
-                    b.HasOne("WebApi.Entities.Intervention", "InterventionId")
-                        .WithMany()
-                        .HasForeignKey("InterventionIdId");
-
-                    b.HasOne("WebApi.Entities.Patient", "PatientId")
-                        .WithMany()
-                        .HasForeignKey("PatientIdId");
-
-                    b.HasOne("WebApi.Entities.TimeSlot", "SlotId")
-                        .WithMany()
-                        .HasForeignKey("SlotIdId");
-
-                    b.HasOne("WebApi.Entities.Status", "StatusId")
-                        .WithMany()
-                        .HasForeignKey("StatusIdId");
                 });
 #pragma warning restore 612, 618
         }
