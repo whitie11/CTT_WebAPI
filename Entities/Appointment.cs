@@ -8,8 +8,7 @@ namespace WebApi.Entities
         public int Id { get; set; }
         public DateTime Date { get; set; }
          
-        [ForeignKey("Patients")]
-        public  Patient PatientId { get; set; }
+        [ForeignKey("Patients")] public  Patient PatientId { get; set; }
         [ForeignKey("TimeSlots")] public TimeSlot SlotId { get; set; }
         [ForeignKey("Clinics")] public Clinic ClinicId { get; set; }
         [ForeignKey("Interventions")] public Intervention InterventionId { get; set; }
