@@ -12,6 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
+using WebApi.Entities2;
+
 
 namespace WebApi
 {
@@ -34,7 +36,7 @@ namespace WebApi
             //     services.AddDbContext<DataContext>();
             // else
             //     services.AddDbContext<DataContext, SqliteDataContext>();
- services.AddDbContext<DataContext>();
+ services.AddDbContext<CTT_DbContext>();
             services.AddCors();
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -80,10 +82,13 @@ namespace WebApi
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IListService, ListService>();
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IDiaryService, DiaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CTT_DbContext dataContext)
         {
             // migrate any database changes on startup (includes initial db creation)
             dataContext.Database.Migrate();

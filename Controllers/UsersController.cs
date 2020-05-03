@@ -10,8 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using WebApi.Services;
-using WebApi.Entities;
 using WebApi.Models.Users;
+using WebApi.Entities2;
 
 namespace WebApi.Controllers
 {
@@ -76,7 +76,7 @@ namespace WebApi.Controllers
         public IActionResult Register([FromBody]RegisterModel model)
         {
             // map model to entity
-            var user = _mapper.Map<User>(model);
+            var user = _mapper.Map<Users>(model);
 
             try
             {
@@ -112,7 +112,7 @@ namespace WebApi.Controllers
         public IActionResult Update(int id, [FromBody]UpdateModel model)
         {
             // map model to entity and set id
-            var user = _mapper.Map<User>(model);
+            var user = _mapper.Map<Users>(model);
             user.Id = id;
 
             try
