@@ -5,15 +5,15 @@ namespace WebApi.Models.Patients
 {
     public partial class PatientDTO
     {
-        public int PatientId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime Dob { get; set; }
-        public string Nhsno { get; set; }
-        public string Cpmsno { get; set; }
-        public string Notes { get; set; }
-        public bool? IsOpen { get; set; }
-        public int LocalityId { get; set; }
+        public int patientId { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public DateTime dob { get; set; }
+        public string nhsNo { get; set; }
+        public string cpmsNo { get; set; }
+        public string notes { get; set; }
+        public bool? isOpen { get; set; }
+        public int localityId { get; set; }
     }
 
 }

@@ -20,7 +20,7 @@ namespace WebApi.Helpers
             .ForMember(dest => dest.ClinicName, opt => opt.MapFrom(src => src.ClinicName))
             ;
 
-            CreateMap<Patients, PatientDTO>();
+            CreateMap<Patients, PatientDTO>().ReverseMap();
 
            // CreateMap<Appointment, ApptDTO>();
         }
