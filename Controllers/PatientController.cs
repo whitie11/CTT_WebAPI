@@ -40,7 +40,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("saveNewPt")]
-        public IActionResult saveNewPt([FromBody]PatientDTO model)
+        public IActionResult saveNewPt([FromBody]PtNewDTO model)
         {
             try
             {

@@ -41,17 +41,22 @@ namespace WebApi.Controllers
 
             foreach (TimeSlots ts in timeSlots)
             {
+                DiaryRow dr = new DiaryRow
+                {
+                    timeSlot = new TimeSlot(),
+                    setA = new DiaryListItem(),
+                    setB = new DiaryListItem(),
+                    setC = new DiaryListItem(),
+                };
+
+                dr.timeSlot = new TimeSlot
+                {
+                    timeSlotId = ts.TimeSlotId,
+                    slot = ts.Slot
+                };
 
                 foreach (Appts appt in appts)
                 {
-                    DiaryRow dr = new DiaryRow
-                    {
-                        timeSlot = new TimeSlot(),
-                        setA = new DiaryListItem(),
-                        setB = new DiaryListItem(),
-                        setC = new DiaryListItem(),
-                    };
-
                     if (appt.ClinicGroup == "A" && appt.TimeSlotId == ts.TimeSlotId)
                     {
                         dr.setA = new DiaryListItem
@@ -66,7 +71,7 @@ namespace WebApi.Controllers
                         };
 
                     }
-                    else if (appt.ClinicGroup == "B"  && appt.TimeSlotId == ts.TimeSlotId)
+                    else if (appt.ClinicGroup == "B" && appt.TimeSlotId == ts.TimeSlotId)
                     {
                         dr.setB = new DiaryListItem
                         {
@@ -79,7 +84,7 @@ namespace WebApi.Controllers
                             Notes = appt.Notes
                         };
                     }
-                    else if (appt.ClinicGroup == "C"  && appt.TimeSlotId == ts.TimeSlotId)
+                    else if (appt.ClinicGroup == "C" && appt.TimeSlotId == ts.TimeSlotId)
                     {
                         dr.setC = new DiaryListItem
                         {
@@ -92,16 +97,9 @@ namespace WebApi.Controllers
                             Notes = appt.Notes
                         };
                     }
-
-                    dr.timeSlot = new TimeSlot
-                    {
-                        timeSlotId = ts.TimeSlotId,
-                        slot = ts.Slot
-                    };
-
-                    diaryList.Add(dr);
-
-                }
+                }  
+                
+                diaryList.Add(dr);
             }
 
             return diaryList;

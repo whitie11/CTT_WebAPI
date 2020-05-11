@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebApi.Helpers;
 using WebApi.Models.Patients;
@@ -29,7 +30,7 @@ namespace WebApi.Services
 
         public IEnumerable<Patients> GetAllPts()
         {
-            return _context.Patients;
+            return _context.Patients.Include(l => l.Locality);
         }
 
         public Patients saveNewPt(Patients newPt)

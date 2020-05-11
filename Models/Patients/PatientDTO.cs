@@ -13,7 +13,7 @@ namespace WebApi.Models.Patients
         public string cpmsNo { get; set; }
         public string notes { get; set; }
         public bool? isOpen { get; set; }
-        public int localityId { get; set; }
+        public LocalityDTO locality { get; set; }
     }
 
 }

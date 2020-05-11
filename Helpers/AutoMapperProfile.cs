@@ -2,7 +2,7 @@ using AutoMapper;
 using WebApi.Entities;
 using WebApi.Models.Users;
 using WebApi.Models.Diary;
-using  WebApi.Models.Patients;
+using WebApi.Models.Patients;
 using WebApi.Entities2;
 
 namespace WebApi.Helpers
@@ -15,14 +15,23 @@ namespace WebApi.Helpers
             CreateMap<RegisterModel, Users>();
             CreateMap<UpdateModel, Users>();
 
-            CreateMap< Clinics, ClinicDTO>()
+            CreateMap<Clinics, ClinicDTO>()
             .ForMember(dest => dest.ClinicId, opt => opt.MapFrom(src => src.ClinicId))
             .ForMember(dest => dest.ClinicName, opt => opt.MapFrom(src => src.ClinicName))
             ;
 
-            CreateMap<Patients, PatientDTO>().ReverseMap();
 
-           // CreateMap<Appointment, ApptDTO>();
+            CreateMap<LocalityDTO, Localities>().ReverseMap();;
+
+            CreateMap<Patients, PatientDTO>();
+            
+            
+            CreateMap< PatientDTO, Patients>()
+             .ForMember(dest => dest.LocalityId, opt => opt.MapFrom(src => src.locality.LocalityId));
+            
+
+            CreateMap<PtNewDTO, Patients >();
+            // CreateMap<Appointment, ApptDTO>();
         }
     }
 }
