@@ -14,6 +14,7 @@ namespace WebApi.Services
     {
         IEnumerable<Appts> GetApptsOnDate(DiaryReqDTO diaryReqDTO);
         IEnumerable<TimeSlots> GetTimeSlots();
+        Appts saveAppt(Appts newAppt);
 
     }
 
@@ -44,7 +45,13 @@ namespace WebApi.Services
             return _context.TimeSlots.ToList();
         }
 
+        public Appts saveAppt(Appts newAppt)
+        {
+            _context.Appts.Add(newAppt);
+            _context.SaveChanges();
 
+            return newAppt;
+        }
 
     }
 }

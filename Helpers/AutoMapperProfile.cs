@@ -21,17 +21,21 @@ namespace WebApi.Helpers
             ;
 
 
-            CreateMap<LocalityDTO, Localities>().ReverseMap();;
+            CreateMap<LocalityDTO, Localities>().ReverseMap();
 
             CreateMap<Patients, PatientDTO>();
-            
-            
-            CreateMap< PatientDTO, Patients>()
-             .ForMember(dest => dest.LocalityId, opt => opt.MapFrom(src => src.locality.LocalityId));
-            
 
-            CreateMap<PtNewDTO, Patients >();
-            // CreateMap<Appointment, ApptDTO>();
+
+            CreateMap<PatientDTO, Patients>()
+             .ForMember(dest => dest.LocalityId, opt => opt.MapFrom(src => src.locality.LocalityId));
+
+
+            CreateMap<PtNewDTO, Patients>();
+
+            CreateMap<Types, ApptTypesDTO>();
+
+
+            CreateMap<Appts, ApptDTO>();
         }
     }
 }

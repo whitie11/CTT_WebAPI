@@ -19,7 +19,7 @@ namespace WebApi.Controllers
     public class ListController : ControllerBase
     {
         private IListService _listService;
-         private IMapper _mapper;
+        private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public ListController(
@@ -28,11 +28,11 @@ namespace WebApi.Controllers
             IOptions<AppSettings> appSettings)
         {
             _listService = listService;
-             _mapper = mapper;
+            _mapper = mapper;
             _appSettings = appSettings.Value;
         }
 
-         [HttpGet("getClinics")]
+        [HttpGet("getClinics")]
         public IActionResult GetClinics()
         {
             var clinics = _listService.GetClinics();
@@ -40,12 +40,20 @@ namespace WebApi.Controllers
             return Ok(model);
         }
 
-               [HttpGet("getLocalities")]
+        [HttpGet("getLocalities")]
         public IActionResult GetLocalities()
         {
             var clinics = _listService.GetLocalities();
-           // var model = _mapper.Map<IList<UserModel>>(users);
+            // var model = _mapper.Map<IList<UserModel>>(users);
             return Ok(clinics);
+        }
+
+        [HttpGet("getApptTypes")]
+        public IActionResult GetApptTypes()
+        {
+            var types = _listService.GetApptTypes();
+            var model = _mapper.Map<IList<ApptTypesDTO>>(types);
+            return Ok(model);
         }
 
 

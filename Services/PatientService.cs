@@ -13,6 +13,7 @@ namespace WebApi.Services
     public interface IPatientService
     {
         IEnumerable<Patients> GetAllPts();
+        IEnumerable<ClinicListDTO> GetClinicList(int localityId);
         Patients saveNewPt(Patients newPt);
         public void Update(PtEditDTO data);
 
@@ -31,6 +32,23 @@ namespace WebApi.Services
         public IEnumerable<Patients> GetAllPts()
         {
             return _context.Patients.Include(l => l.Locality);
+        }
+
+        public IEnumerable<ClinicListDTO> GetClinicList(int localityId)
+        {
+            var cl =  _context.Patients
+            .Where(l => l.LocalityId == localityId)
+            .Include(l => l.Locality);
+
+            var res = new List<ClinicListDTO>();
+            foreach(Patients p in cl){
+                var pt = new ClinicListDTO{
+                    ptId = p.PatientId,
+                    ptName = p.FirstName + " " + p.LastName
+                };
+                res.Add(pt);
+            }
+            return res;
         }
 
         public Patients saveNewPt(Patients newPt)

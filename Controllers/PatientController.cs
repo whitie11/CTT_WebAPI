@@ -39,12 +39,11 @@ namespace WebApi.Controllers
             return Ok(model);
         }
 
-                [HttpGet("getClinicList")]
-        public IActionResult GetClinicList()
+        [HttpGet("getClinicList/{localityId}")]
+        public IActionResult GetClinicList(int localityId)
         {
-            var pts = _patientService.GetAllPts();
-            var model = _mapper.Map<IList<PatientDTO>>(pts);
-            return Ok(model);
+            return Ok(_patientService.GetClinicList(localityId));
+
         }
 
         [HttpPost("saveNewPt")]

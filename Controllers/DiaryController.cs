@@ -105,7 +105,21 @@ namespace WebApi.Controllers
             return diaryList;
         }
 
+        [HttpPost("saveAppt")]
+        public IActionResult saveAppt([FromBody]ApptDTO model)
+        {
+            try
+            {
+                var appt = _mapper.Map<WebApi.Entities2.Appts>(model);
+                _diaryService.saveAppt(appt);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+               return BadRequest("Appointment not saved! " + e.InnerException.Message);
+            }
 
+        }
 
 
     }
