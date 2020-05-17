@@ -35,7 +35,7 @@ namespace WebApi.Helpers
             CreateMap<Types, ApptTypesDTO>();
 
 
-            CreateMap<Appts, ApptDTO>();
+            CreateMap<Appts, ApptDTO>().ReverseMap();
         }
     }
 }
