@@ -67,7 +67,8 @@ namespace WebApi.Controllers
                             apptId = appt.ApptId,
                             patientId = appt.PatientId,
                             timeSlotId = ts.TimeSlotId,
-                            Notes = appt.Notes
+                            Notes = appt.Notes,
+                            StageId = appt.StageId
                         };
 
                     }
@@ -81,7 +82,8 @@ namespace WebApi.Controllers
                             apptId = appt.ApptId,
                             patientId = appt.PatientId,
                             timeSlotId = ts.TimeSlotId,
-                            Notes = appt.Notes
+                            Notes = appt.Notes,
+                            StageId = appt.StageId
                         };
                     }
                     else if (appt.ClinicGroup == "C" && appt.TimeSlotId == ts.TimeSlotId)
@@ -94,7 +96,8 @@ namespace WebApi.Controllers
                             apptId = appt.ApptId,
                             patientId = appt.PatientId,
                             timeSlotId = ts.TimeSlotId,
-                            Notes = appt.Notes
+                            Notes = appt.Notes,
+                            StageId = appt.StageId
                         };
                     }
                 }  
