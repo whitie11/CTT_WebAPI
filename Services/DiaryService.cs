@@ -14,7 +14,8 @@ namespace WebApi.Services
     {
         IEnumerable<Appts> GetApptsOnDate(DiaryReqDTO diaryReqDTO);
         IEnumerable<TimeSlots> GetTimeSlots();
-        Appts saveAppt(Appts newAppt);
+        Appts SaveAppt(Appts newAppt);
+        Appts GetById(int apptId);
 
     }
 
@@ -27,25 +28,29 @@ namespace WebApi.Services
             _context = context;
         }
 
+        public Appts GetById(int id)
+        {
+            return _context.Appts.Find(id);
+        }
 
         public IEnumerable<Appts> GetApptsOnDate(DiaryReqDTO diaryReqDTO)
         {
 
             return _context.Appts
             .Include(t => t.Type)
-            .Include(p =>p.Patient)
+            .Include(p => p.Patient)
             .Where(d => d.Date == DateTime
             .Parse(diaryReqDTO.date) && d.ClinicId == diaryReqDTO.ClinicId)
             .ToList();
         }
 
-            public IEnumerable<TimeSlots> GetTimeSlots()
+        public IEnumerable<TimeSlots> GetTimeSlots()
         {
 
             return _context.TimeSlots.ToList();
         }
 
-        public Appts saveAppt(Appts newAppt)
+        public Appts SaveAppt(Appts newAppt)
         {
             _context.Appts.Add(newAppt);
             _context.SaveChanges();

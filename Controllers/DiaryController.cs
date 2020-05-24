@@ -31,6 +31,14 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+                [HttpGet("{id}")]
+        public IActionResult GetById([FromForm] int id)
+        {
+            var appt = _diaryService.GetById(id);
+            var model = _mapper.Map<Appts>(appt);
+            return Ok(model);
+        }
+
         [HttpPost("getDiaryPage")]
         public IEnumerable<DiaryRow> GetDiaryPage(DiaryReqDTO diaryReq)
         {
@@ -114,7 +122,7 @@ namespace WebApi.Controllers
             try
             {
                 var appt = _mapper.Map<WebApi.Entities2.Appts>(model);
-                _diaryService.saveAppt(appt);
+                _diaryService.SaveAppt(appt);
                 return Ok();
             }
             catch (Exception e)
