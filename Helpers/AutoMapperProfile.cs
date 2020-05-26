@@ -36,6 +36,12 @@ namespace WebApi.Helpers
 
 
             CreateMap<Appts, ApptDTO>().ReverseMap();
+
+            CreateMap<Appts, ApptDTO2>();
+
+            CreateMap<TimeSlots, WebApi.Models.Diary.TimeSlot>();
+
+            CreateMap<Stages, Stage>();
         }
     }
 }

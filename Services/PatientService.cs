@@ -12,6 +12,7 @@ namespace WebApi.Services
 {
     public interface IPatientService
     {
+        Patients GetById(int id);
         IEnumerable<Patients> GetAllPts();
         IEnumerable<ClinicListDTO> GetClinicList(int localityId);
         Patients saveNewPt(Patients newPt);
@@ -28,6 +29,10 @@ namespace WebApi.Services
             _context = context;
         }
 
+        public Patients GetById(int id)
+        {
+            return _context.Patients.Include(l =>l.Locality).Where(p =>p.PatientId == id).FirstOrDefault();
+        }
 
         public IEnumerable<Patients> GetAllPts()
         {

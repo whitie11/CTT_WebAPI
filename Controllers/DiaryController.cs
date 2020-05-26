@@ -18,24 +18,29 @@ namespace WebApi.Controllers
     public class DiaryController : ControllerBase
     {
         private IDiaryService _diaryService;
+        private IPatientService _patientService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public DiaryController(
              IDiaryService diaryService,
+             IPatientService patientService,
              IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _diaryService = diaryService;
+            _patientService = patientService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
 
                 [HttpGet("{id}")]
-        public IActionResult GetById([FromForm] int id)
+        public IActionResult GetById(int id)
         {
             var appt = _diaryService.GetById(id);
-            var model = _mapper.Map<Appts>(appt);
+           // var pt = _patientService.GetById(1);
+           var model = _mapper.Map<ApptDTO2>(appt);
+          
             return Ok(model);
         }
 

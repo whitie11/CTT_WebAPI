@@ -31,6 +31,14 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+        [HttpGet("getById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var pt = _patientService.GetById(id);
+            var model = _mapper.Map<PatientDTO>(pt);
+            return Ok(model);
+        }
+
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
@@ -47,7 +55,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("saveNewPt")]
-        public IActionResult saveNewPt([FromBody]PtNewDTO model)
+        public IActionResult saveNewPt([FromBody] PtNewDTO model)
         {
             try
             {
@@ -57,14 +65,14 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-               return BadRequest("New patient not saved! " + e.InnerException.Message);
+                return BadRequest("New patient not saved! " + e.InnerException.Message);
             }
 
         }
 
 
-                [HttpPut("updatePt")]
-        public IActionResult UpdatePt([FromBody]PtEditDTO model)
+        [HttpPut("updatePt")]
+        public IActionResult UpdatePt([FromBody] PtEditDTO model)
         {
             try
             {

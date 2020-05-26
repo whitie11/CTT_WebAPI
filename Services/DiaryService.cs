@@ -30,7 +30,15 @@ namespace WebApi.Services
 
         public Appts GetById(int id)
         {
-            return _context.Appts.Find(id);
+            return _context.Appts
+                .Include(t =>t.Type)
+                .Include(c => c.Clinic)
+                .Include(p => p.Patient)
+                .Include(p => p.Patient.Locality)
+                .Include(t => t.TimeSlot)
+                .Include(s => s.Stage)
+                .Where(a => a.ApptId == id)
+                .First();
         }
 
         public IEnumerable<Appts> GetApptsOnDate(DiaryReqDTO diaryReqDTO)
